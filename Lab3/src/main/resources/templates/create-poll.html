@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Створити голосування</title>
+</head>
+<body>
+<h2>Створити нове голосування</h2>
+<form action="/poll/create" method="post">
+  <label>Назва голосування:</label><br>
+  <input type="text" name="title" required/><br><br>
+
+  <label>Ім'я хазяїна (Owner):</label><br>
+  <input type="text" name="owner" required/><br><br>
+
+  <label>Претенденти (через кому):</label><br>
+  <input type="text" name="candidatesString" placeholder="Кандидат 1, Кандидат 2, Кандидат 3" required/><br><br>
+
+  <button type="submit">Створити</button>
+</form>
+<br>
+<a href="/">На головну</a>
+</body>
+</html>

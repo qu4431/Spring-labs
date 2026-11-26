@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Результати голосування</title>
+</head>
+<body>
+<h2 th:text="'Результати: ' + ${poll.title}">Результати</h2>
+<ul>
+  <li th:each="candidate : ${poll.candidates}">
+    <!-- <span th:text="${candidate.name}"></span> — голосів: <b th:text="${candidate.votesCount}"></b> -->
+    <span th:text="${candidate.name}"></span> —
+    <span th:switch="${candidate.votesCount}">
+      <span th:case="0">поки немає голосів</span>
+      <span th:case="1"><b>1</b> голос</span>
+      <span th:case="2"><b>2</b> голоси</span>
+      <span th:case="3"><b>3</b> голоси</span>
+      <span th:case="4"><b>4</b> голоси</span>
+      <span th:case="5"><b>5</b> голосів</span>
+      <span th:case="6"><b>6</b> голосів</span>
+      <span th:case="7"><b>7</b> голосів</span>
+      <span th:case="8"><b>8</b> голосів</span>
+      <span th:case="9"><b>9</b> голосів</span>
+      <span th:case="*"><b>*}</b> голосів</span>
+    </span>
+  </li>
+</ul>
+<a th:href="@{/poll/{id}(id=${poll.id})}">Повернутися до голосування</a> |
+<a href="/">На головну</a>
+</body>
+</html>

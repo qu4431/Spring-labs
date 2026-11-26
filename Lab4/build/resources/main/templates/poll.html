@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Голосування</title>
+</head>
+<body>
+<h2 th:text="${poll.title}">Назва голосування</h2>
+<p>VoteToken: <code th:text="${voteToken.tokenValue}"></code></p>
+
+<div th:if="${poll.active}">
+  <form th:action="@{/poll/{id}/vote(id=${poll.id})}" method="post">
+    <label>Введіть ваше ім'я (для запобігання повторному голосуванню):</label><br>
+    <input type="text" name="username" required/><br><br>
+
+    <p>Оберіть претендента:</p>
+    <div th:each="candidate : ${poll.candidates}">
+      <input type="radio" name="candidateId" th:value="${candidate.id}" required/>
+      <label th:text="${candidate.name}"></label><br>
+    </div>
+    <br>
+    <button type="submit">Проголосувати</button>
+  </form>
+</div>
+<div th:unless="${poll.active}">
+  <p style="color: red;">Це голосування наразі зупинено хазяїном!</p>
+</div>
+<br>
+<a href="/">На головну</a>
+</body>
+</html>

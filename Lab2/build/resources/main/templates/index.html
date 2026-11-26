@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Система онлайн голосувань</title>
+</head>
+<body>
+<h1>Список голосувань</h1>
+<a href="/poll/create">Створити нове голосування</a>
+<hr>
+<ul>
+    <li th:each="poll : ${polls}">
+        <b th:text="${poll.title}">Назва</b> (Хазяїн: <span th:text="${poll.owner}"></span>)
+        - Статус: <span th:text="${poll.active} ? 'Активне' : 'Зупинене'"></span>
+        <br>
+        <a th:href="@{/poll/{id}(id=${poll.id})}">Перейти / Голосувати</a> |
+        <a th:href="@{/poll/{id}/results(id=${poll.id})}">Результати</a>
+
+        <form th:action="@{/poll/{id}/toggle(id=${poll.id})}" method="post" style="display:inline;">
+            <input type="hidden" name="owner" th:value="${poll.owner}"/>
+            <button type="submit">Змінити статус</button>
+        </form>
+    </li>
+</ul>
+</body>
+</html>
